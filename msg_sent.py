@@ -13,9 +13,15 @@ Contact_number=[]
 def dashboard():
     root = tk.Tk()
     root.title("Whatsapp Bot System")
-    root.geometry("400x400")
+    root.geometry("700x400")
     root.configure(bg="#07a61f")
-    
+
+    lable= tk.Label(root,text=  " Welcome To Whatsapp Bot System",
+                    font=("Arial",20,"bold"),bg="#07a61f",fg="white")
+    lable.pack(pady=20)
+    lable2=tk.Label(root,text="🖂",font=("Arial",50,"bold"),bg="#07a61f",fg="white")
+    lable2.pack(pady=20)
+
     root.mainloop()
 
 dashboard()
