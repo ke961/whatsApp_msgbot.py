@@ -20,7 +20,7 @@ def dashboard():
                     font=("Arial",20,"bold"),bg="#07a61f",fg="white")
     lable.pack(pady=20)
     lable2=tk.Label(root,text="🖂",font=("Arial",50,"bold"),bg="#07a61f",fg="white")
-    lable2.pack(pady=20)
+    lable2.pack(pady=30)
 
     root.mainloop()
 
