@@ -17,6 +17,7 @@ def show_bot_page():
     next_page1.pack(fill="both", expand=True)
 
 
+# Save contact information
 def show_saved_contacts():
     name = contact_entry_name.get()
     number = contact_entry.get()
@@ -30,7 +31,7 @@ def show_saved_contacts():
         messagebox.showwarning("Input Error", "Please enter both contact name and number.")
 
 
-
+#  Listbox for saved contacts
 def listbox():
     next_page1.pack_forget()
     next_page2.pack(fill="both", expand=True)
@@ -41,10 +42,11 @@ def listbox():
 
 
 
+#  MAIN PAGE
 
 root = tk.Tk()
 root.title("WhatsApp Bot System")
-root.geometry("700x400")
+root.geometry("700x700")
 root.configure(bg="#000000")
 
 welcome_page = tk.Frame(root, bg="#000000")
@@ -56,6 +58,7 @@ next_page2 = tk.Frame(root, bg="#000000")
 
 
 #  Welcome Page 1
+
 welcome_page.pack(fill="both", expand=True)
 
 tk.Label(
@@ -98,6 +101,7 @@ contact_entry_name = tk.Entry(next_page1,font=("Arial", 14), width=30 ,fg="gray"
 contact_entry_name.pack(pady=10)
 
 # placeholder for contact name entry
+
 placeholder_text = "Enter contact name"
 contact_entry_name.insert(0, placeholder_text)
 
@@ -134,6 +138,7 @@ tk.Label(
 
 
 # placeholder for contact number entry
+
 contact_entry = tk.Entry(next_page1, font=("Arial", 14), width=30, fg="gray")
 contact_entry.pack(pady=10)
 
@@ -159,10 +164,17 @@ tk.Button(next_page1, text ="save ",font=("Arial", 12), bg="#056410", fg="white"
 tk.Button(next_page1, text= "Show list", font=("Arial", 12), bg="#056410", fg="white",
             command=listbox ).pack(pady=10)
 
+tk.Button(next_page1, text="Back", font=("Arial", 12), bg="#056410", fg="white",
+          command=lambda: [next_page1.pack_forget(),
+                            welcome_page.pack(fill="both", expand=True)]).pack(pady=10)
 
 
 #page 3
 tk.Label(next_page2, text="saved contact number", font=("Arial", 14, "bold"), bg="#000000", fg="#048a18").pack(pady=20)
+
+tk.Button(next_page2, text="Back", font=("Arial", 12), bg="#056410", fg="white",
+          command=lambda: [next_page2.pack_forget(),
+                           next_page1.pack(fill="both", expand=True)]).pack(pady=10)
 
 
 
