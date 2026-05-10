@@ -1,25 +1,41 @@
-
-
 import pywhatkit
 from datetime import datetime ,timedelta
 import time
 import tkinter as tk
 from tkinter import messagebox , ttk
 
+
+
+Contact_number = []
+
+
  #PAGE SWITCH 
 def show_bot_page():
     welcome_page.pack_forget()
+    next_page2.pack_forget()
     next_page1.pack(fill="both", expand=True)
 
-def show_listbox():
-    list_window= tk.Toplevel(root)
-    list_window.title("contact list")
-    list_window.geometry("400x300")
-    list_window.configure(bg="#000000")
-    tk.Label(list_window, text="Saved Contact Numbers", font=("Arial", 14, "bold"),
-              bg="#000000", fg="#048a18").pack(pady=10)
-    listbox = tk.Listbox(list_window, font=("Arial", 12), width=40, height=10) 
+
+def show_saved_contacts():
+    number= contact_entry.get()
+    if number:
+        Contact_number.append(number)
+        messagebox.showinfo("Saved", "Contact number saved successfully!")
+        contact_entry.delete(0, tk.END)
+    else:
+        messagebox.showwarning("Input Error", "Please enter a contact number.")
+
+
+
+def listbox():
+    next_page1.pack_forget()
+    next_page2.pack(fill="both", expand=True)
+    listbox = tk.Listbox(next_page2, font=("Arial", 12), width=30, height=10)
     listbox.pack(pady=10)
+    for contact in Contact_number:
+        listbox.insert(tk.END, contact)
+
+
 
 
 root = tk.Tk()
@@ -29,6 +45,7 @@ root.configure(bg="#000000")
 
 welcome_page = tk.Frame(root, bg="#000000")
 next_page1 = tk.Frame(root, bg="#000000")
+next_page2 = tk.Frame(root, bg="#000000")
 
 
 
@@ -64,6 +81,42 @@ tk.Button(
 
 
 #  PAGE 2 
+
+
+
+
+
+
+tk.Label(
+    next_page1,
+    text="Enter Contact Name",
+    font=("Arial", 14, "bold"),
+    bg="#000000",
+    fg="#048a18"
+).pack(pady=20)
+
+contact_entry_name = tk.Entry(next_page1,font=("Arial", 14), width=30 ,fg="gray")
+contact_entry_name.pack(pady=10)
+
+# placeholder for contact name entry
+placeholder_text = "Enter contact name"
+contact_entry_name.insert(0, placeholder_text)
+
+def on_entry_click(event):
+    if contact_entry_name.get()== placeholder_text:
+        contact_entry_name.delete(0, tk.END)
+        contact_entry_name.config(fg="black")
+
+def on_focusout(event):
+    if contact_entry_name.get()== "":
+        contact_entry_name.insert(0, placeholder_text)
+        contact_entry_name.config(fg="gray")
+
+contact_entry_name.bind("<FocusIn>", on_entry_click)
+contact_entry_name.bind("<FocusOut>", on_focusout)
+
+
+
 tk.Label(
     next_page1,
     text="Enter Contact Number",
@@ -83,10 +136,37 @@ tk.Label(
 contact_entry = tk.Entry(next_page1, font=("Arial", 14), width=30)
 contact_entry.pack(pady=10)
 
+placeholder_text = "Enter contact number"
+contact_entry.insert(0, placeholder_text)
+
+def on_entry_click(event):
+    if contact_entry.get()== placeholder_text:
+        contact_entry.delete(0, tk.END)
+        contact_entry.config(fg="black")
+
+def on_focusout(event):
+    if contact_entry.get()== "":
+        contact_entry.insert(0, placeholder_text)
+        contact_entry.config(fg="gray")
+
+contact_entry.bind("<FocusIn>", on_entry_click)
+contact_entry.bind("<FocusOut>", on_focusout)
+
+
 tk.Button(next_page1, text ="save ",font=("Arial", 12), bg="#056410", fg="white", 
-          command=lambda: messagebox.showinfo("Saved", "Contact number saved successfully!")).pack(pady=10)
+          command=show_saved_contacts).pack(pady=10)
 tk.Button(next_page1, text= "Show list", font=("Arial", 12), bg="#056410", fg="white",
-            command=lambda:show_listbox).pack(pady=10)
+            command=listbox ).pack(pady=10)
+
+
+
+#page 3
+tk.Label(next_page2, text="saved contact number", font=("Arial", 14, "bold"), bg="#000000", fg="#048a18").pack(pady=20)
+
+
+
+
+
 
 
 
