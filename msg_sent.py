@@ -7,6 +7,7 @@ from tkinter import messagebox , ttk
 
 
 Contact_number = []
+Contact_name= []
 
 
  #PAGE SWITCH 
@@ -17,13 +18,16 @@ def show_bot_page():
 
 
 def show_saved_contacts():
-    number= contact_entry.get()
-    if number:
+    name = contact_entry_name.get()
+    number = contact_entry.get()
+    if name and number:
+        Contact_name.append(name)
         Contact_number.append(number)
-        messagebox.showinfo("Saved", "Contact number saved successfully!")
+        messagebox.showinfo("Saved", " Your Contact has been saved successfully!")
         contact_entry.delete(0, tk.END)
+        contact_entry_name.delete(0, tk.END)
     else:
-        messagebox.showwarning("Input Error", "Please enter a contact number.")
+        messagebox.showwarning("Input Error", "Please enter both contact name and number.")
 
 
 
@@ -32,8 +36,8 @@ def listbox():
     next_page2.pack(fill="both", expand=True)
     listbox = tk.Listbox(next_page2, font=("Arial", 12), width=30, height=10)
     listbox.pack(pady=10)
-    for contact in Contact_number:
-        listbox.insert(tk.END, contact)
+    for i, contact in enumerate(Contact_number):
+        listbox.insert(tk.END, f"{Contact_name[i]}: {contact}")
 
 
 
@@ -82,11 +86,6 @@ tk.Button(
 
 #  PAGE 2 
 
-
-
-
-
-
 tk.Label(
     next_page1,
     text="Enter Contact Name",
@@ -133,7 +132,9 @@ tk.Label(
     fg="#048a18"
 ).pack(pady=5)
 
-contact_entry = tk.Entry(next_page1, font=("Arial", 14), width=30)
+
+# placeholder for contact number entry
+contact_entry = tk.Entry(next_page1, font=("Arial", 14), width=30, fg="gray")
 contact_entry.pack(pady=10)
 
 placeholder_text = "Enter contact number"
