@@ -54,9 +54,11 @@ def show_saved_contacts():
 
         save_contacts_to_file()  # Save contacts to file after adding a new contact
         messagebox.showinfo("Saved", " Your Contact has been saved successfully!")
-        
+
         contact_entry.delete(0, tk.END)
         contact_entry_name.delete(0, tk.END)
+
+
     else:
         messagebox.showwarning("Input Error", "Please enter both contact name and number.")
 
@@ -121,7 +123,7 @@ tk.Button(
 
 #  PAGE 2 
 
-tk.Label(-+
+tk.Label(
          
     next_page1,
     text="Enter Contact Name",
