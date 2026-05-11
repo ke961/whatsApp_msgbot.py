@@ -36,10 +36,10 @@ def listbox():
     next_page1.pack_forget()
     next_page2.pack(fill="both", expand=True)
 
-    listbox.delete(0, tk.END)
+    listbox.delete(0, tk.END) # Clear the listbox before adding new items
 
-    for i, contact in enumerate(Contact_number):
-        listbox.insert(tk.END, f"{Contact_name[i]} : {contact}")
+    for i, contact in enumerate(Contact_number):   # Loop through the contact numbers and their corresponding names
+        listbox.insert(tk.END, f"{Contact_name[i]} : {contact}")  # Insert the contact name and number into the listbox in the format "Name : Number"
 
 
 
