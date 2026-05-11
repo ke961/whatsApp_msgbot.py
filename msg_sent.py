@@ -208,11 +208,11 @@ entry_message = tk.Entry(next_page3, font=("Arial", 12), width=40, fg="Black")
 entry_message.pack(pady=10)
 
 
-
+# Send message function
 def send_message():
-    selected_index= listbox.curselection()
+    selected_index= listbox.curselection() # Get the selected index from the listbox
     if selected_index:
-        selected_index = selected_index[0]
+        selected_index = selected_index[0] # Get the first selected index
         selected_contact = Contact_number[selected_index]
         message = entry_message.get()
         if message:
@@ -229,11 +229,11 @@ def send_message():
         messagebox.showwarning("Selection Error", "Please select a contact from the list.")
 
 
+
 tk.Button(next_page3, text="Send Message", font=("Arial", 12), bg="#056410", fg="white", command=send_message).pack(pady=10)
 
     
-tk.Button(next_page3, text="Back", font=("Arial", 12), bg="#056410", fg="white",
-          
+tk.Button(next_page3, text="Back", font=("Arial", 12), bg="#056410", fg="white",     
             command=lambda: [next_page3.pack_forget(),
                              next_page2.pack(fill="both", expand=True)]).pack(pady=10)
                                 
