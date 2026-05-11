@@ -6,6 +6,7 @@ from datetime import datetime ,timedelta
 import time
 import tkinter as tk
 from tkinter import messagebox , ttk
+import PIL.Image, PIL.ImageTk
 
 
 Contact_number = []
@@ -98,12 +99,16 @@ def delete_contact():
 root = tk.Tk()
 root.title("WhatsApp Bot System")
 root.geometry("700x700")
-root.configure(bg="#000000")
+bg_image = PIL.Image.open("img.png")# Load the background image
 
-welcome_page = tk.Frame(root, bg="#000000")
-next_page1 = tk.Frame(root, bg="#000000")
-next_page2 = tk.Frame(root, bg="#000000")
-next_page3 = tk.Frame(root, bg="#000000")
+bg_image= bg_image.resize((1000, 1000)) # Resize the image to fit the window
+bg_photo = PIL.ImageTk.PhotoImage(bg_image) # Convert the image to a PhotoImage
+
+
+welcome_page = tk.Frame(root)
+next_page1 = tk.Frame(root)
+next_page2 = tk.Frame(root)
+next_page3 = tk.Frame(root)
 
 
 
@@ -111,22 +116,28 @@ next_page3 = tk.Frame(root, bg="#000000")
 
 #  Welcome Page 1
 
+bg_label1=tk.Label(welcome_page, image=bg_photo) # Create a label to display the background image
+bg_label1.place(x=0, y=0, relwidth=1, relheight=1) # Position the background image to cover the entire window
+bg_label1.lower() # Send the background label to the back so that other widgets can be displayed on top of it
+
 welcome_page.pack(fill="both", expand=True)
+
+
 
 tk.Label(
     welcome_page,
     text="Welcome To WhatsApp Bot System",
     font=("Arial", 20, "bold"),
-    bg="#000000",
-    fg="#048a18"
+    bg="#FFFFFF",
+    fg="#050B84"
 ).pack(pady=20)
 
 tk.Label(
     welcome_page,
     text="🖂",
-    font=("Arial", 50),
-    bg="#000000",
-    fg="#048a18"
+    font=("Arial", 50, "bold"),
+    bg="#FFFFFF",
+    fg="#050B84"
 ).pack(pady=30)
 
 tk.Button(
@@ -134,20 +145,24 @@ tk.Button(
     text="Next",
     command=show_bot_page,
     font=("Arial", 14, "bold"),
-    bg="#056410",
-    fg="white"
+    bg="#150564",
+    fg="white",
+  
 ).pack(pady=20)
 
 
 #  PAGE 2 
+bg_label1=tk.Label(next_page1, image=bg_photo) # Create a label to display the background image
+bg_label1.place(x=0, y=0, relwidth=1, relheight=1) # Position the background image to cover the entire window
+bg_label1.lower() # Send the background label to the back so that other widgets can be displayed on top of it
 
 tk.Label(
          
     next_page1,
     text="Enter Contact Name",
     font=("Arial", 14, "bold"),
-    bg="#000000",
-    fg="#048a18"
+    bg="#FFFFFF",
+    fg="#050B84"
 ).pack(pady=20)
 
 contact_entry_name = tk.Entry(next_page1,font=("Arial", 14), width=30 ,fg="gray")
@@ -177,16 +192,15 @@ tk.Label(
     next_page1,
     text="Enter Contact Number",
     font=("Arial", 14, "bold"),
-    bg="#000000",
-    fg="#048a18"
+    bg="#FFFFFF",
+    fg="#050B84"
 ).pack(pady=20)
 
 tk.Label(
     next_page1,
     text="(Include country code, e.g., +880 for Bangladesh)",
-    font=("Arial", 10),
-    bg="#000000",
-    fg="#048a18"
+    font=("Arial", 10), 
+    fg="#050B84"
 ).pack(pady=5)
 
 
@@ -212,25 +226,29 @@ contact_entry.bind("<FocusIn>", on_entry_click)
 contact_entry.bind("<FocusOut>", on_focusout)
 
 
-tk.Button(next_page1, text ="save ",font=("Arial", 12), bg="#056410", fg="white", 
+tk.Button(next_page1, text ="save ",font=("Arial", 12), bg="#150564", fg="white", 
           command=show_saved_contacts).pack(pady=10)
-tk.Button(next_page1, text= "Show list", font=("Arial", 12), bg="#056410", fg="white",
+tk.Button(next_page1, text= "Show list", font=("Arial", 12), bg="#150564", fg="white",
             command=listbox 
             ).pack(pady=10)
 
-tk.Button(next_page1, text="Back", font=("Arial", 12), bg="#056410", fg="white",
+tk.Button(next_page1, text="Back", font=("Arial", 12), bg="#150564", fg="white",
           command=lambda: [next_page1.pack_forget(),
                             welcome_page.pack(fill="both", expand=True)]).pack(pady=10)
 
 
 #page 3
+bg_label1=tk.Label(next_page2, image=bg_photo) # Create a label to display the background image
+bg_label1.place(x=0, y=0, relwidth=1, relheight=1) # Position the background image to cover the entire window
+bg_label1.lower() # Send the background label to the back so that other widgets can be displayed on top of it
 
-tk.Label(next_page2, text="saved contact number", font=("Arial", 14, "bold"), bg="#000000",
-          fg="#048a18").pack(pady=20)
+
+tk.Label(next_page2, text="Saved contact number", font=("Arial", 14, "bold"),
+          fg="#050B84").pack(pady=20)
 
 listbox = tk.Listbox(next_page2, font=("Arial", 12), width=30, height=10,selectmode="single",
-                      bg="#EDE5E5", fg="#050505", highlightbackground="#344136", highlightcolor="#629469"
-                      , highlightthickness=2)
+                      bg="#EDE5E5", fg="#050505", highlightbackground="#47AFDF", highlightcolor="#5566E1"
+                      , highlightthickness=4)
 listbox.pack(pady=10)
 
 
@@ -246,17 +264,21 @@ def on_select(event):
         
 listbox.bind("<<ListboxSelect>>", on_select)
 
-tk.Button(next_page2, text="Delete Contact", font=("Arial", 12), bg="#056410", fg="white",
+tk.Button(next_page2, text="Delete Contact", font=("Arial", 12), bg="#150564", fg="white",
             command=delete_contact).pack(pady=10)
 
-tk.Button(next_page2, text="Back", font=("Arial", 12), bg="#056410", fg="white",
+tk.Button(next_page2, text="Back", font=("Arial", 12), bg="#150564", fg="white",
           command=lambda: [next_page2.pack_forget(),
                            next_page1.pack(fill="both", expand=True)]).pack(pady=10)
 
 
 #page 4
-tk.Label(next_page3, text="Write your Message", font=("Arial", 14, "bold"), bg="#000000",
-          fg="#048a18").pack(pady=20)
+bg_label1=tk.Label(next_page3, image=bg_photo) # Create a label to display the background image
+bg_label1.place(x=0, y=0, relwidth=1, relheight=1) # Position the background image to cover the entire window
+bg_label1.lower() # Send the background label to the back so that other widgets can be displayed on top of it
+
+tk.Label(next_page3, text="Write your Message", font=("Arial", 14, "bold"),
+          fg="#050B84").pack(pady=20)
 entry_message = tk.Entry(next_page3, font=("Arial", 12), width=40, fg="Black")
 entry_message.pack(pady=10)
 
@@ -284,10 +306,10 @@ def send_message():
 
 
 
-tk.Button(next_page3, text="Send Message", font=("Arial", 12), bg="#056410", fg="white", command=send_message).pack(pady=10)
+tk.Button(next_page3, text="Send Message", font=("Arial", 12), bg="#150564", fg="white", command=send_message).pack(pady=10)
 
     
-tk.Button(next_page3, text="Back", font=("Arial", 12), bg="#056410", fg="white",     
+tk.Button(next_page3, text="Back", font=("Arial", 12), bg="#150564", fg="white",     
             command=lambda: [next_page3.pack_forget(),
                              next_page2.pack(fill="both", expand=True)]).pack(pady=10)
                                 
