@@ -1,3 +1,6 @@
+import json
+import os
+
 import pywhatkit
 from datetime import datetime ,timedelta
 import time
@@ -5,9 +8,33 @@ import tkinter as tk
 from tkinter import messagebox , ttk
 
 
-
 Contact_number = []
 Contact_name= []
+
+File_name = "Contacts.json" # JSON file to store contact names and numbers
+ 
+ # Load contacts from file when the program starts
+
+def load_contacts():
+    if os .path.exists(File_name):
+        with open(File_name, "r") as file:
+            data= json.load(file)
+            return data.get("contact_names", []), data.get("contact_numbers", [])
+    return [],[]
+
+
+# Save contacts to file
+def save_contacts_to_file():
+    data = {
+        "contact_names": Contact_name,
+        "contact_numbers": Contact_number
+    }
+    with open(File_name, "w") as file:
+        json.dump(data, file, indent=4)  # Save contact names and numbers to JSON file with indentation for readability 
+
+
+
+
 
 
  #PAGE SWITCH 
@@ -21,10 +48,13 @@ def show_bot_page():
 def show_saved_contacts():
     name = contact_entry_name.get()
     number = contact_entry.get()
-    if name and number:
+    if name and number and name != "Enter contact name" and number != "Enter contact number":
         Contact_name.append(name)
         Contact_number.append(number)
+
+        save_contacts_to_file()  # Save contacts to file after adding a new contact
         messagebox.showinfo("Saved", " Your Contact has been saved successfully!")
+        
         contact_entry.delete(0, tk.END)
         contact_entry_name.delete(0, tk.END)
     else:
@@ -91,7 +121,8 @@ tk.Button(
 
 #  PAGE 2 
 
-tk.Label(
+tk.Label(-+
+         
     next_page1,
     text="Enter Contact Name",
     font=("Arial", 14, "bold"),
@@ -211,6 +242,7 @@ entry_message.pack(pady=10)
 # Send message function
 def send_message():
     selected_index= listbox.curselection() # Get the selected index from the listbox
+
     if selected_index:
         selected_index = selected_index[0] # Get the first selected index
         selected_contact = Contact_number[selected_index]
