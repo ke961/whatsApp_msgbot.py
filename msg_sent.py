@@ -74,6 +74,24 @@ def listbox():
         listbox.insert(tk.END, f"{Contact_name[i]} : {contact}")  # Insert the contact name and number into the listbox in the format "Name : Number"
 
 
+#delete contact from listbox
+def delete_contact():
+    select_index= listbox.curselection()
+    if not select_index:
+        messagebox.showwarning("Selection Error", "Please select a contact to delete.")
+        return
+    
+    if select_index:
+        select_index= select_index[0]
+        del Contact_name[select_index]  # Remove the contact name from the list
+        del Contact_number[select_index]  # Remove the contact number from the list
+       
+         # Save the updated contacts to the file
+        listbox.delete(select_index)  # Remove the contact from the listbox
+        messagebox.showinfo("Deleted", "Contact has been deleted successfully!")
+    save_contacts_to_file() 
+    show_saved_contacts() # Refresh the listbox to show the updated contacts after deletion
+
 
 #  MAIN PAGE
 
@@ -197,7 +215,8 @@ contact_entry.bind("<FocusOut>", on_focusout)
 tk.Button(next_page1, text ="save ",font=("Arial", 12), bg="#056410", fg="white", 
           command=show_saved_contacts).pack(pady=10)
 tk.Button(next_page1, text= "Show list", font=("Arial", 12), bg="#056410", fg="white",
-            command=listbox ).pack(pady=10)
+            command=listbox 
+            ).pack(pady=10)
 
 tk.Button(next_page1, text="Back", font=("Arial", 12), bg="#056410", fg="white",
           command=lambda: [next_page1.pack_forget(),
@@ -210,7 +229,7 @@ tk.Label(next_page2, text="saved contact number", font=("Arial", 14, "bold"), bg
           fg="#048a18").pack(pady=20)
 
 listbox = tk.Listbox(next_page2, font=("Arial", 12), width=30, height=10,selectmode="single",
-                      bg="#EDE5E5", fg="#048a18", highlightbackground="#048a18", highlightcolor="#048a18"
+                      bg="#EDE5E5", fg="#050505", highlightbackground="#344136", highlightcolor="#629469"
                       , highlightthickness=2)
 listbox.pack(pady=10)
 
@@ -227,7 +246,8 @@ def on_select(event):
         
 listbox.bind("<<ListboxSelect>>", on_select)
 
-
+tk.Button(next_page2, text="Delete Contact", font=("Arial", 12), bg="#056410", fg="white",
+            command=delete_contact).pack(pady=10)
 
 tk.Button(next_page2, text="Back", font=("Arial", 12), bg="#056410", fg="white",
           command=lambda: [next_page2.pack_forget(),
