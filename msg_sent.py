@@ -165,7 +165,7 @@ tk.Label(
     fg="#050B84"
 ).pack(pady=20)
 
-contact_entry_name = tk.Entry(next_page1,font=("Arial", 14), width=30 ,fg="gray")
+contact_entry_name = tk.Entry(next_page1,font=("Arial", 14), width=30 ,fg="gray", bg="#FFFFFF")
 contact_entry_name.pack(pady=10)
 
 # placeholder for contact name entry
@@ -199,6 +199,7 @@ tk.Label(
 tk.Label(
     next_page1,
     text="(Include country code, e.g., +880 for Bangladesh)",
+    bg="#FFFFFF",
     font=("Arial", 10), 
     fg="#050B84"
 ).pack(pady=5)
@@ -244,10 +245,10 @@ bg_label1.lower() # Send the background label to the back so that other widgets 
 
 
 tk.Label(next_page2, text="Saved contact number", font=("Arial", 14, "bold"),
-          fg="#050B84").pack(pady=20)
+         bg="#FFFFFF", fg="#050B84").pack(pady=20)
 
 listbox = tk.Listbox(next_page2, font=("Arial", 12), width=30, height=10,selectmode="single",
-                      bg="#EDE5E5", fg="#050505", highlightbackground="#47AFDF", highlightcolor="#5566E1"
+                      bg="#FFFFFF", fg="#050505", highlightbackground="#47AFDF", highlightcolor="#5566E1"
                       , highlightthickness=4)
 listbox.pack(pady=10)
 
